@@ -1,26 +1,57 @@
+/* src/app/globals.css */
 @import "tailwindcss";
+@source "../**/*.{js,ts,jsx,tsx,mdx}";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* 1. KELAS UTAMA UNTUK KOMPONEN TAILWIND */
+@theme {
+  --color-theme-primary: var(--dynamic-primary);
+  --color-theme-primary-light: var(--dynamic-primary-light); /* <-- TAMBAHKAN INI */
+  --color-theme-grad-start: var(--dynamic-grad-start);
+  --color-theme-grad-end: var(--dynamic-grad-end);
+  --color-theme-bg: var(--dynamic-bg);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* TEMA 1: DEFAULT */
+:root, .theme-default {
+  --dynamic-primary: #b82c3c;
+  --dynamic-primary-light: #fdf2f4; /* Crimson versi super muda */
+  --dynamic-grad-start: #1c3d52;
+  --dynamic-grad-end: #0f172a;
+  --dynamic-bg: #f8fafc;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* TEMA 2: TEMP1 */
+.theme-temp1 {
+  --dynamic-primary: #10b981;
+  --dynamic-primary-light: #ecfdf5; /* Hijau versi super muda */
+  --dynamic-grad-start: #064e3b;
+  --dynamic-grad-end: #022c22;
+  --dynamic-bg: #f0fdf4;
 }
 
+/* TEMA 3: TEMP2 */
+.theme-temp2 {
+  --dynamic-primary: #8b5cf6;
+  --dynamic-primary-light: #f5f3ff; /* Ungu versi super muda */
+  --dynamic-grad-start: #2e1065;
+  --dynamic-grad-end: #000000;
+  --dynamic-bg: #faf5ff;
+}
+
+/* BASE BODY SETUP */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--dynamic-bg);
+  color: #0f172a;
+  transition: all 0.3s ease; /* Biaya animasi transisi warna biar halus */
 }
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slideUp { animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-fadeIn { animation: fadeIn 0.2s ease-out forwards; }
